@@ -1,0 +1,1721 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="https://github.com/fent/node-ytdl-core#readme"
+
+    >ytdl-core (v0.12.1)</a>
+</h1>
+<h4>Youtube video downloader in pure javascript.</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.ytdl-core">module ytdl-core</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.ytdl-core">
+            function <span class="apidocSignatureSpan"></span>ytdl-core
+            <span class="apidocSignatureSpan">(link, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.chooseFormat">
+            function <span class="apidocSignatureSpan">ytdl-core.</span>chooseFormat
+            <span class="apidocSignatureSpan">(formats, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.downloadFromInfo">
+            function <span class="apidocSignatureSpan">ytdl-core.</span>downloadFromInfo
+            <span class="apidocSignatureSpan">(info, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.filterFormats">
+            function <span class="apidocSignatureSpan">ytdl-core.</span>filterFormats
+            <span class="apidocSignatureSpan">(formats, filter)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.getInfo">
+            function <span class="apidocSignatureSpan">ytdl-core.</span>getInfo
+            <span class="apidocSignatureSpan">(link, options, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.toString">
+            function <span class="apidocSignatureSpan">ytdl-core.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">ytdl-core.</span>cache</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">ytdl-core.</span>sig</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">ytdl-core.</span>util</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.ytdl-core.cache">module ytdl-core.cache</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.cache.get">
+            function <span class="apidocSignatureSpan">ytdl-core.cache.</span>get
+            <span class="apidocSignatureSpan">(key)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.cache.reset">
+            function <span class="apidocSignatureSpan">ytdl-core.cache.</span>reset
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.cache.set">
+            function <span class="apidocSignatureSpan">ytdl-core.cache.</span>set
+            <span class="apidocSignatureSpan">(key, value)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">ytdl-core.cache.</span>store</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.ytdl-core.sig">module ytdl-core.sig</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.sig.decipher">
+            function <span class="apidocSignatureSpan">ytdl-core.sig.</span>decipher
+            <span class="apidocSignatureSpan">(tokens, sig)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.sig.decipherFormats">
+            function <span class="apidocSignatureSpan">ytdl-core.sig.</span>decipherFormats
+            <span class="apidocSignatureSpan">(formats, tokens, debug)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.sig.extractActions">
+            function <span class="apidocSignatureSpan">ytdl-core.sig.</span>extractActions
+            <span class="apidocSignatureSpan">(body)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.sig.getTokens">
+            function <span class="apidocSignatureSpan">ytdl-core.sig.</span>getTokens
+            <span class="apidocSignatureSpan">(html5playerfile, options, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.sig.setDownloadURL">
+            function <span class="apidocSignatureSpan">ytdl-core.sig.</span>setDownloadURL
+            <span class="apidocSignatureSpan">(format, sig, debug)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.ytdl-core.util">module ytdl-core.util</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.between">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>between
+            <span class="apidocSignatureSpan">(haystack, left, right)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.chooseFormat">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>chooseFormat
+            <span class="apidocSignatureSpan">(formats, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.filterFormats">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>filterFormats
+            <span class="apidocSignatureSpan">(formats, filter)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.fromHumanTime">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>fromHumanTime
+            <span class="apidocSignatureSpan">(time)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.getAuthor">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>getAuthor
+            <span class="apidocSignatureSpan">(body)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.getPublished">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>getPublished
+            <span class="apidocSignatureSpan">(body)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.getRelatedVideos">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>getRelatedVideos
+            <span class="apidocSignatureSpan">(body)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.getVideoDescription">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>getVideoDescription
+            <span class="apidocSignatureSpan">(html)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.getVideoID">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>getVideoID
+            <span class="apidocSignatureSpan">(link)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.objectAssign">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>objectAssign
+            <span class="apidocSignatureSpan">(target, source, deep)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.parallel">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>parallel
+            <span class="apidocSignatureSpan">(funcs, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.parseFormats">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>parseFormats
+            <span class="apidocSignatureSpan">(info, debug)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.parseTime">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>parseTime
+            <span class="apidocSignatureSpan">(time)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.sortFormats">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>sortFormats
+            <span class="apidocSignatureSpan">(a, b)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.ytdl-core" id="apidoc.module.ytdl-core">module ytdl-core</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.ytdl-core" id="apidoc.element.ytdl-core.ytdl-core">
+        function <span class="apidocSignatureSpan"></span>ytdl-core
+        <span class="apidocSignatureSpan">(link, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function ytdl(link, options) {
+  var stream = createStream(options);
+  getInfo(link, options, function(err, info) {
+    if (err) {
+      stream.emit(&#x27;error&#x27;, err);
+      return;
+    }
+
+    downloadFromInfoCallback(stream, info, options);
+  });
+
+  return stream;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.chooseFormat" id="apidoc.element.ytdl-core.chooseFormat">
+        function <span class="apidocSignatureSpan">ytdl-core.</span>chooseFormat
+        <span class="apidocSignatureSpan">(formats, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">chooseFormat = function (formats, options) {
+
+  if (typeof options.format === &#x27;object&#x27;) {
+    return options.format;
+  }
+
+  if (options.filter) {
+    formats = exports.filterFormats(formats, options.filter);
+    if (formats.length === 0) {
+      return new Error(&#x27;No formats found with custom filter&#x27;);
+    }
+  }
+
+  var format;
+  var quality = options.quality || &#x27;highest&#x27;;
+  switch (quality) {
+  case &#x27;highest&#x27;:
+    format = formats[0];
+    break;
+
+  case &#x27;lowest&#x27;:
+    format = formats[formats.length - 1];
+    break;
+
+  default:
+    var getFormat = function(itag) {
+      for (var i = 0, len = formats.length; i &#x3c; len; i++) {
+        if (formats[i].itag === &#x27;&#x27; + itag) {
+          return formats[i];
+        }
+      }
+      return null;
+    };
+    if (Array.isArray(quality)) {
+      for (var i = 0, len = quality.length; i &#x3c; len; i++) {
+        format = getFormat(quality[i]);
+        if (format) { break; }
+      }
+    } else {
+      format = getFormat(quality);
+    }
+
+  }
+
+  if (!format) {
+    return new Error(&#x27;No such format found: &#x27; + quality);
+  } else if (format.rtmp) {
+    return new Error(&#x27;rtmp protocol not supported&#x27;);
+  }
+  return format;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Use this if you only want to get metainfo from a video. If `callback` isn&#x27;t given, returns a promise.
+
+### ytdl.downloadFromInfo(info, options)
+
+Once you have received metadata from a video with the `getInfo` function,
+you may pass that `info`, along with other `options` to `downloadFromInfo`.
+
+### ytdl.<span class="apidocCodeKeywordSpan">chooseFormat</span>(formats, options)
+
+Can be used if you&#x27;d like to choose a format yourself with the [options above](#ytdlurl-options).
+
+### ytdl.filterFormats(formats, filter)
+
+If you&#x27;d like to work with only some formats, you can use the [`filter` option above](#ytdlurl-options).
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.downloadFromInfo" id="apidoc.element.ytdl-core.downloadFromInfo">
+        function <span class="apidocSignatureSpan">ytdl-core.</span>downloadFromInfo
+        <span class="apidocSignatureSpan">(info, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">downloadFromInfo = function (info, options) {
+  var stream = createStream(options);
+  setImmediate(function() {
+    downloadFromInfoCallback(stream, info, options);
+  });
+  return stream;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+Destroys the underlying connection.
+
+### ytdl.getInfo(url, [options], [callback(err, info)])
+
+Use this if you only want to get metainfo from a video. If `callback` isn&#x27;t given, returns a promise.
+
+### ytdl.<span class="apidocCodeKeywordSpan">downloadFromInfo</span>(info, options)
+
+Once you have received metadata from a video with the `getInfo` function,
+you may pass that `info`, along with other `options` to `downloadFromInfo`.
+
+### ytdl.chooseFormat(formats, options)
+
+Can be used if you&#x27;d like to choose a format yourself with the [options above](#ytdlurl-options).
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.filterFormats" id="apidoc.element.ytdl-core.filterFormats">
+        function <span class="apidocSignatureSpan">ytdl-core.</span>filterFormats
+        <span class="apidocSignatureSpan">(formats, filter)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">filterFormats = function (formats, filter) {
+  var fn;
+  switch (filter) {
+  case &#x27;video&#x27;:
+    fn = function(format) { return format.bitrate; };
+    break;
+
+  case &#x27;videoonly&#x27;:
+    fn = function(format) { return format.bitrate &#x26;&#x26; !format.audioBitrate; };
+    break;
+
+  case &#x27;audio&#x27;:
+    fn = function(format) { return format.audioBitrate; };
+    break;
+
+  case &#x27;audioonly&#x27;:
+    fn = function(format) { return !format.bitrate &#x26;&#x26; format.audioBitrate; };
+    break;
+
+  default:
+    fn = filter;
+  }
+  return formats.filter(fn);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Once you have received metadata from a video with the `getInfo` function,
+you may pass that `info`, along with other `options` to `downloadFromInfo`.
+
+### ytdl.chooseFormat(formats, options)
+
+Can be used if you&#x27;d like to choose a format yourself with the [options above](#ytdlurl-options).
+
+### ytdl.<span class="apidocCodeKeywordSpan">filterFormats</span>(formats, filter)
+
+If you&#x27;d like to work with only some formats, you can use the [`filter` option above](#ytdlurl-options).
+
+## Limitations
+
+ytdl cannot download videos that fall into the following
+* Regionally restricted (requires a [proxy](example/proxy.js))
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.getInfo" id="apidoc.element.ytdl-core.getInfo">
+        function <span class="apidocSignatureSpan">ytdl-core.</span>getInfo
+        <span class="apidocSignatureSpan">(link, options, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function getInfo(link, options, callback) {
+  if (typeof options === &#x27;function&#x27;) {
+    callback = options;
+    options = {};
+  } else if (!options) {
+    options = {};
+  }
+  if (!callback) {
+    return new Promise(function(resolve, reject) {
+      getInfo(link, options, function(err, info) {
+        if (err) return reject(err);
+        resolve(info);
+      });
+    });
+  }
+
+  var myrequest = options.request || request;
+  var id = util.getVideoID(link);
+  if (id instanceof Error) return callback(id);
+
+  // Try getting config from the video page first.
+  var url = VIDEO_URL + id;
+  myrequest(url, options.requestOptions, function(err, body) {
+    if (err) return callback(err);
+
+    // Check if there are any errors with this video page.
+    var unavailableMsg = util.between(body, &#x27;&#x3c;div id=&#x22;player-unavailable&#x22;&#x27;, &#x27;&#x3e;&#x27;);
+    if (!/\bhid\b/.test(util.between(unavailableMsg, &#x27;class=&#x22;&#x27;, &#x27;&#x22;&#x27;))) {
+      // Ignore error about age restriction.
+      if (body.indexOf(&#x27;&#x3c;div id=&#x22;watch7-player-age-gate-content&#x22;&#x27;) &#x3c; 0) {
+        return callback(new Error(util.between(body,
+          &#x27;&#x3c;h1 id=&#x22;unavailable-message&#x22; class=&#x22;message&#x22;&#x3e;&#x27;, &#x27;&#x3c;/h1&#x3e;&#x27;).trim()));
+      }
+    }
+
+    // Parse out some additional informations since we already load that page.
+    var additional = {
+      // Get informations about the author/uploader.
+      author: util.getAuthor(body),
+
+      // Get the day the vid was published.
+      published: util.getPublished(body),
+
+      // Get description from #eow-description.
+      description: util.getVideoDescription(body),
+
+      // Get related videos.
+      related_videos: util.getRelatedVideos(body),
+
+      // Give the canonical link to the video.
+      video_url: url,
+
+      // Thumbnails.
+      iurlsd     : THUMBNAIL_URL + id + &#x27;/sddefault.jpg&#x27;,
+      iurlmq     : THUMBNAIL_URL + id + &#x27;/mqdefault.jpg&#x27;,
+      iurlhq     : THUMBNAIL_URL + id + &#x27;/hqdefault.jpg&#x27;,
+      iurlmaxres : THUMBNAIL_URL + id + &#x27;/maxresdefault.jpg&#x27;,
+    };
+
+    var jsonStr = util.between(body, &#x27;ytplayer.config = &#x27;, &#x27;&#x3c;/script&#x3e;&#x27;);
+    if (jsonStr) {
+      jsonStr = jsonStr.slice(0, jsonStr.lastIndexOf(&#x27;;ytplayer.load&#x27;));
+      var config;
+      try {
+        config = JSON.parse(jsonStr);
+      } catch (err) {
+        return callback(new Error(&#x27;Error parsing config: &#x27; + err.message));
+      }
+      if (!config) {
+        return callback(new Error(&#x27;Could not parse video page config&#x27;));
+      }
+      gotConfig(id, options, additional, config, callback);
+
+    } else {
+      // If the video page doesn&#x27;t work, maybe because it has mature content.
+      // and requires an account logged into view, try the embed page.
+      url = EMBED_URL + id;
+      myrequest(url, options.requestOptions, function(err, body) {
+        if (err) return callback(err);
+
+        config = util.between(body, &#x27;t.setConfig({\&#x27;PLAYER_CONFIG\&#x27;: &#x27;, &#x27;},\&#x27;&#x27;);
+        if (!config) {
+          return callback(new Error(&#x27;Could not find `player config`&#x27;));
+        }
+        try {
+          config = JSON.parse(config + &#x27;}&#x27;);
+        } catch (err) {
+          return callback(new Error(&#x27;Error parsing config: &#x27; + err.message));
+        }
+        gotConfig(id, options, additional, config, callback);
+      });
+    }
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+Emitted whenever a new chunk is received. Passes values descriping the download progress and the parsed percentage.
+
+### Stream#destroy()
+
+Destroys the underlying connection.
+
+### ytdl.<span class="apidocCodeKeywordSpan">getInfo</span>(url, [options], [callback(err, info)])
+
+Use this if you only want to get metainfo from a video. If `callback` isn&#x27;t given, returns a promise.
+
+### ytdl.downloadFromInfo(info, options)
+
+Once you have received metadata from a video with the `getInfo` function,
+you may pass that `info`, along with other `options` to `downloadFromInfo`.
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.toString" id="apidoc.element.ytdl-core.toString">
+        function <span class="apidocSignatureSpan">ytdl-core.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return text;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * Parses a string representation of amount of milliseconds.
+ *
+ * @param {String} time
+ * @return {Number}
+ */
+var timeRegexp = /(?:(\d+)h)?(?:(\d+)m(?!s))?(?:(\d+)s)?(?:(\d+)(?:ms)?)?/;
+exports.parseTime = function(time) {
+  var result = timeRegexp.exec(time.<span class="apidocCodeKeywordSpan">toString</span>());
+  var hours  = result[1] || 0;
+  var mins   = result[2] || 0;
+  var secs   = result[3] || 0;
+  var ms     = result[4] || 0;
+
+  return hours * 3600000 + mins * 60000 + secs * 1000 + parseInt(ms, 10);
+};
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.ytdl-core.cache" id="apidoc.module.ytdl-core.cache">module ytdl-core.cache</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.cache.get" id="apidoc.element.ytdl-core.cache.get">
+        function <span class="apidocSignatureSpan">ytdl-core.cache.</span>get
+        <span class="apidocSignatureSpan">(key)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">get = function (key) {
+  return exports.store[key];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Attempts to download a video from the given url. Returns a readable stream. `options` can have the following keys
+
+* `quality` - Video quality to download. Can be an [itag value](http://en.wikipedia.org/wiki/YouTube#Quality_and_formats) value,
+a list of itag values, or `highest`/`lowest`. Defaults to `highest`.
+* `filter` - Can be `video` to filter for formats that contain video, `videoonly` for formats that contain video and no additional
+ audio track. Can also be `audio` or `audioonly`. You can give a filtering function that gets called with each format available.
+Used to decide what format to download. This function is given the `format` object as its first argument, and should return true
+ if the format is preferable.
+* `format` - This can be a specific `format` object returned from `getInfo`. This is primarily used to download specific video or
+ audio streams. **Note:** Supplying this option will ignore the `filter` and `quality` options since the format is explicitly provided
+.
+* `range` - A byte range in the form `{start: INT, end: INT}` that specifies part of the file to download. ie {start: 10355705,
+end: 12452856}. Note that this downloads a portion of the file, and not a separately spliced video.
+* `begin` - What time to begin downloading the video, supports formats 00:00:00.000, or 0ms, 0s, 0m, 0h, or number of milliseconds
+. Example: 1:30, 05:10.123, 10m30s. This option may not work on super short (less than 30s) videos, and has to be at ar above 6s
+. See [#129](https://github.com/fent/node-ytdl-core/issues/129)
+* `requestOptions` - Anything to merge into the request options which `http.<span class="apidocCodeKeywordSpan">get</span>()` is
+ called with, such as headers.
+* `request` - A function that will be called for each request, instead of ytdl&#x27;s internal method of making requests. Its signature
+ looks like `Function(url, options, [callback(error, body)]): http.ClientRequest`
+* `highWaterMark` - How much of the video download to buffer into memory. See [node&#x27;s docs](https://nodejs.org/api/stream.html
+#stream_constructor_new_stream_writable_options) for more.
+
+```js
+// Example with `filter` option.
+ytdl(url, { filter: function(format) { return format.container === &#x27;mp4&#x27;; } })
+.pipe(fs.createWriteStream(&#x27;vide.mp4&#x27;));
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.cache.reset" id="apidoc.element.ytdl-core.cache.reset">
+        function <span class="apidocSignatureSpan">ytdl-core.cache.</span>reset
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">reset = function () {
+  exports.store = {};
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.cache.set" id="apidoc.element.ytdl-core.cache.set">
+        function <span class="apidocSignatureSpan">ytdl-core.cache.</span>set
+        <span class="apidocSignatureSpan">(key, value)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">set = function (key, value) {
+  exports.store[key] = value;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+      var tokens = exports.extractActions(body);
+      if (key &#x26;&#x26; (!tokens || !tokens.length)) {
+        callback(new Error(&#x27;Could not extract signature deciphering actions&#x27;));
+        return;
+      }
+
+      cache.<span class="apidocCodeKeywordSpan">set</span>(key, tokens);
+      callback(null, tokens);
+    });
+  }
+};
+
+
+/**
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.ytdl-core.sig" id="apidoc.module.ytdl-core.sig">module ytdl-core.sig</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.sig.decipher" id="apidoc.element.ytdl-core.sig.decipher">
+        function <span class="apidocSignatureSpan">ytdl-core.sig.</span>decipher
+        <span class="apidocSignatureSpan">(tokens, sig)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">decipher = function (tokens, sig) {
+  sig = sig.split(&#x27;&#x27;);
+  var pos;
+  for (var i = 0, len = tokens.length; i &#x3c; len; i++) {
+    var token = tokens[i];
+    switch (token[0]) {
+    case &#x27;r&#x27;:
+      sig = sig.reverse();
+      break;
+    case &#x27;w&#x27;:
+      pos = ~~token.slice(1);
+      sig = swapHeadAndPosition(sig, pos);
+      break;
+    case &#x27;s&#x27;:
+      pos = ~~token.slice(1);
+      sig = sig.slice(pos);
+      break;
+    case &#x27;p&#x27;:
+      pos = ~~token.slice(1);
+      sig.splice(0, pos);
+      break;
+    }
+  }
+  return sig.join(&#x27;&#x27;);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+/**
+* @param {String} url
+* @param {Array.&#x3c;String&#x3e;} tokens
+*/
+function decipherURL(url, tokens) {
+ return url.replace(/\/s\/([a-fA-F0-9\.]+)/, function(_, s) {
+   return &#x27;/signature/&#x27; + sig.<span class="apidocCodeKeywordSpan">decipher</span>(tokens, s);
+ });
+}
+
+
+/**
+* Merges formats from DASH or M3U8 with formats from video info page.
+*
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.sig.decipherFormats" id="apidoc.element.ytdl-core.sig.decipherFormats">
+        function <span class="apidocSignatureSpan">ytdl-core.sig.</span>decipherFormats
+        <span class="apidocSignatureSpan">(formats, tokens, debug)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">decipherFormats = function (formats, tokens, debug) {
+  formats.forEach(function(format) {
+    var sig = tokens &#x26;&#x26; format.s ? exports.decipher(tokens, format.s) : null;
+    exports.setDownloadURL(format, sig, debug);
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    if (info.formats.some(function(f) { return !!f.s; }) ||
+config.args.dashmpd || info.dashmpd || info.hlsvp) {
+      var html5playerfile = urllib.resolve(VIDEO_URL, config.assets.js);
+      sig.getTokens(html5playerfile, options, function(err, tokens) {
+if (err) return callback(err);
+
+sig.<span class="apidocCodeKeywordSpan">decipherFormats</span>(info.formats, tokens, options.debug);
+
+var funcs = [];
+var dashmpd;
+if (config.args.dashmpd) {
+  dashmpd = decipherURL(config.args.dashmpd, tokens);
+  funcs.push(getDashManifest.bind(null, dashmpd, options));
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.sig.extractActions" id="apidoc.element.ytdl-core.sig.extractActions">
+        function <span class="apidocSignatureSpan">ytdl-core.sig.</span>extractActions
+        <span class="apidocSignatureSpan">(body)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">extractActions = function (body) {
+  var objResult = actionsObjRegexp.exec(body);
+  var funcResult = actionsFuncRegexp.exec(body);
+  if (!objResult || !funcResult) { return null; }
+
+  var obj      = objResult[1].replace(/\$/g, &#x27;\\$&#x27;);
+  var objBody  = objResult[2].replace(/\$/g, &#x27;\\$&#x27;);
+  var funcbody = funcResult[1].replace(/\$/g, &#x27;\\$&#x27;);
+
+  var result = reverseRegexp.exec(objBody);
+  var reverseKey = result &#x26;&#x26; result[1].replace(/\$/g, &#x27;\\$&#x27;);
+  result = sliceRegexp.exec(objBody);
+  var sliceKey = result &#x26;&#x26; result[1].replace(/\$/g, &#x27;\\$&#x27;);
+  result = spliceRegexp.exec(objBody);
+  var spliceKey = result &#x26;&#x26; result[1].replace(/\$/g, &#x27;\\$&#x27;);
+  result = swapRegexp.exec(objBody);
+  var swapKey = result &#x26;&#x26; result[1].replace(/\$/g, &#x27;\\$&#x27;);
+
+  var myreg = &#x27;(?:a=)?&#x27; + obj + &#x27;\\.(&#x27; +
+    [reverseKey, sliceKey, spliceKey, swapKey].join(&#x27;|&#x27;) + &#x27;)\\(a,(\\d+)\\)&#x27;;
+  var tokenizeRegexp = new RegExp(myreg, &#x27;g&#x27;);
+  var tokens = [];
+  while ((result = tokenizeRegexp.exec(funcbody)) !== null) {
+    switch (result[1]) {
+    case swapKey:
+      tokens.push(&#x27;w&#x27; + result[2]);
+      break;
+    case reverseKey:
+      tokens.push(&#x27;r&#x27;);
+      break;
+    case sliceKey:
+      tokens.push(&#x27;s&#x27; + result[2]);
+      break;
+    case spliceKey:
+      tokens.push(&#x27;p&#x27; + result[2]);
+      break;
+    }
+  }
+  return tokens;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  if (cachedTokens) {
+    callback(null, cachedTokens);
+  } else {
+    var myrequest = options.request || request;
+    myrequest(html5playerfile, options.requestOptions, function(err, body) {
+if (err) return callback(err);
+
+var tokens = exports.<span class="apidocCodeKeywordSpan">extractActions</span>(body);
+if (key &#x26;&#x26; (!tokens || !tokens.length)) {
+  callback(new Error(&#x27;Could not extract signature deciphering actions&#x27;));
+  return;
+}
+
+cache.set(key, tokens);
+callback(null, tokens);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.sig.getTokens" id="apidoc.element.ytdl-core.sig.getTokens">
+        function <span class="apidocSignatureSpan">ytdl-core.sig.</span>getTokens
+        <span class="apidocSignatureSpan">(html5playerfile, options, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getTokens = function (html5playerfile, options, callback) {
+  var key, cachedTokens;
+  var rs = /(?:html5)?player-([a-zA-Z0-9\-_]+)(?:\.js|\/)/
+    .exec(html5playerfile);
+  if (rs) {
+    key = rs[1];
+    cachedTokens = cache.get(key);
+  } else {
+    console.warn(&#x27;Could not extract html5player key:&#x27;, html5playerfile);
+  }
+  if (cachedTokens) {
+    callback(null, cachedTokens);
+  } else {
+    var myrequest = options.request || request;
+    myrequest(html5playerfile, options.requestOptions, function(err, body) {
+      if (err) return callback(err);
+
+      var tokens = exports.extractActions(body);
+      if (key &#x26;&#x26; (!tokens || !tokens.length)) {
+        callback(new Error(&#x27;Could not extract signature deciphering actions&#x27;));
+        return;
+      }
+
+      cache.set(key, tokens);
+      callback(null, tokens);
+    });
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    // Add additional properties to info.
+    info = util.objectAssign(info, additional, false);
+
+    if (info.formats.some(function(f) { return !!f.s; }) ||
+config.args.dashmpd || info.dashmpd || info.hlsvp) {
+      var html5playerfile = urllib.resolve(VIDEO_URL, config.assets.js);
+      sig.<span class="apidocCodeKeywordSpan">getTokens</span>(html5playerfile, options, function(err, tokens) {
+if (err) return callback(err);
+
+sig.decipherFormats(info.formats, tokens, options.debug);
+
+var funcs = [];
+var dashmpd;
+if (config.args.dashmpd) {
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.sig.setDownloadURL" id="apidoc.element.ytdl-core.sig.setDownloadURL">
+        function <span class="apidocSignatureSpan">ytdl-core.sig.</span>setDownloadURL
+        <span class="apidocSignatureSpan">(format, sig, debug)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setDownloadURL = function (format, sig, debug) {
+  var decodedUrl;
+  if (format.url) {
+    decodedUrl = format.url;
+  } else {
+    if (debug) {
+      console.warn(&#x27;Download url not found for itag &#x27; + format.itag);
+    }
+    return;
+  }
+
+  try {
+    decodedUrl = decodeURIComponent(decodedUrl);
+  } catch (err) {
+    if (debug) {
+      console.warn(&#x27;Could not decode url: &#x27; + err.message);
+    }
+    return;
+  }
+
+  // Make some adjustments to the final url.
+  var parsedUrl = url.parse(decodedUrl, true);
+
+  // Deleting the `search` part is necessary otherwise changes to
+  // `query` won&#x27;t reflect when running `url.format()`
+  delete parsedUrl.search;
+
+  var query = parsedUrl.query;
+
+  // This is needed for a speedier download.
+  // See https://github.com/fent/node-ytdl-core/issues/127
+  query.ratebypass = &#x27;yes&#x27;;
+  if (sig) {
+    query.signature = sig;
+  }
+
+  format.url = url.format(parsedUrl);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+ * @param {Array.&#x3c;Object&#x3e;} formats
+ * @param {Array.&#x3c;String&#x3e;} tokens
+ * @param {Boolean} debug
+ */
+exports.decipherFormats = function(formats, tokens, debug) {
+  formats.forEach(function(format) {
+    var sig = tokens &#x26;&#x26; format.s ? exports.decipher(tokens, format.s) : null;
+    exports.<span class="apidocCodeKeywordSpan">setDownloadURL</span>(format, sig, debug);
+  });
+};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.ytdl-core.util" id="apidoc.module.ytdl-core.util">module ytdl-core.util</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.between" id="apidoc.element.ytdl-core.util.between">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>between
+        <span class="apidocSignatureSpan">(haystack, left, right)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">between = function (haystack, left, right) {
+  var pos;
+  pos = haystack.indexOf(left);
+  if (pos === -1) { return &#x27;&#x27;; }
+  haystack = haystack.slice(pos + left.length);
+  pos = haystack.indexOf(right);
+  if (pos === -1) { return &#x27;&#x27;; }
+  haystack = haystack.slice(0, pos);
+  return haystack;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+  // Try getting config from the video page first.
+  var url = VIDEO_URL + id;
+  myrequest(url, options.requestOptions, function(err, body) {
+if (err) return callback(err);
+
+// Check if there are any errors with this video page.
+var unavailableMsg = util.<span class="apidocCodeKeywordSpan">between</span>(body, &#x27;&#x3c;div id=&#x22;player-unavailable&#
+x22;&#x27;, &#x27;&#x3e;&#x27;);
+if (!/\bhid\b/.test(util.between(unavailableMsg, &#x27;class=&#x22;&#x27;, &#x27;&#x22;&#x27;))) {
+  // Ignore error about age restriction.
+  if (body.indexOf(&#x27;&#x3c;div id=&#x22;watch7-player-age-gate-content&#x22;&#x27;) &#x3c; 0) {
+    return callback(new Error(util.between(body,
+      &#x27;&#x3c;h1 id=&#x22;unavailable-message&#x22; class=&#x22;message&#x22;&#x3e;&#x27;, &#x27;&#x3c;/h1&#x3e;&#x27;).trim
+()));
+  }
+}
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.chooseFormat" id="apidoc.element.ytdl-core.util.chooseFormat">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>chooseFormat
+        <span class="apidocSignatureSpan">(formats, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">chooseFormat = function (formats, options) {
+
+  if (typeof options.format === &#x27;object&#x27;) {
+    return options.format;
+  }
+
+  if (options.filter) {
+    formats = exports.filterFormats(formats, options.filter);
+    if (formats.length === 0) {
+      return new Error(&#x27;No formats found with custom filter&#x27;);
+    }
+  }
+
+  var format;
+  var quality = options.quality || &#x27;highest&#x27;;
+  switch (quality) {
+  case &#x27;highest&#x27;:
+    format = formats[0];
+    break;
+
+  case &#x27;lowest&#x27;:
+    format = formats[formats.length - 1];
+    break;
+
+  default:
+    var getFormat = function(itag) {
+      for (var i = 0, len = formats.length; i &#x3c; len; i++) {
+        if (formats[i].itag === &#x27;&#x27; + itag) {
+          return formats[i];
+        }
+      }
+      return null;
+    };
+    if (Array.isArray(quality)) {
+      for (var i = 0, len = quality.length; i &#x3c; len; i++) {
+        format = getFormat(quality[i]);
+        if (format) { break; }
+      }
+    } else {
+      format = getFormat(quality);
+    }
+
+  }
+
+  if (!format) {
+    return new Error(&#x27;No such format found: &#x27; + quality);
+  } else if (format.rtmp) {
+    return new Error(&#x27;rtmp protocol not supported&#x27;);
+  }
+  return format;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Use this if you only want to get metainfo from a video. If `callback` isn&#x27;t given, returns a promise.
+
+### ytdl.downloadFromInfo(info, options)
+
+Once you have received metadata from a video with the `getInfo` function,
+you may pass that `info`, along with other `options` to `downloadFromInfo`.
+
+### ytdl.<span class="apidocCodeKeywordSpan">chooseFormat</span>(formats, options)
+
+Can be used if you&#x27;d like to choose a format yourself with the [options above](#ytdlurl-options).
+
+### ytdl.filterFormats(formats, filter)
+
+If you&#x27;d like to work with only some formats, you can use the [`filter` option above](#ytdlurl-options).
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.filterFormats" id="apidoc.element.ytdl-core.util.filterFormats">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>filterFormats
+        <span class="apidocSignatureSpan">(formats, filter)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">filterFormats = function (formats, filter) {
+  var fn;
+  switch (filter) {
+  case &#x27;video&#x27;:
+    fn = function(format) { return format.bitrate; };
+    break;
+
+  case &#x27;videoonly&#x27;:
+    fn = function(format) { return format.bitrate &#x26;&#x26; !format.audioBitrate; };
+    break;
+
+  case &#x27;audio&#x27;:
+    fn = function(format) { return format.audioBitrate; };
+    break;
+
+  case &#x27;audioonly&#x27;:
+    fn = function(format) { return !format.bitrate &#x26;&#x26; format.audioBitrate; };
+    break;
+
+  default:
+    fn = filter;
+  }
+  return formats.filter(fn);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+Once you have received metadata from a video with the `getInfo` function,
+you may pass that `info`, along with other `options` to `downloadFromInfo`.
+
+### ytdl.chooseFormat(formats, options)
+
+Can be used if you&#x27;d like to choose a format yourself with the [options above](#ytdlurl-options).
+
+### ytdl.<span class="apidocCodeKeywordSpan">filterFormats</span>(formats, filter)
+
+If you&#x27;d like to work with only some formats, you can use the [`filter` option above](#ytdlurl-options).
+
+## Limitations
+
+ytdl cannot download videos that fall into the following
+* Regionally restricted (requires a [proxy](example/proxy.js))
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.fromHumanTime" id="apidoc.element.ytdl-core.util.fromHumanTime">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>fromHumanTime
+        <span class="apidocSignatureSpan">(time)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">fromHumanTime = function (time) {
+  if (typeof time === &#x27;number&#x27;) { return time; }
+  if (numberFormat.test(time)) { return +time; }
+  var firstFormat = timeFormat.exec(time);
+  if (firstFormat) {
+    return +(firstFormat[1] || 0) * timeUnits.h +
+      +(firstFormat[2] || 0) * timeUnits.m +
+      +(firstFormat[3] || 0) * timeUnits.s +
+      +(firstFormat[4] || 0);
+  } else {
+    var total = 0;
+    var r = /(\d+)(ms|s|m|h)/g;
+    var rs;
+    while ((rs = r.exec(time)) != null) {
+      total += +rs[1] * timeUnits[rs[2]];
+    }
+    return total;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.getAuthor" id="apidoc.element.ytdl-core.util.getAuthor">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>getAuthor
+        <span class="apidocSignatureSpan">(body)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getAuthor = function (body) {
+  var ownerinfo = exports.between(body, &#x27;&#x3c;div id=&#x22;watch7-user-header&#x22; class=&#x22; spf-link &#x22;&#x3e;&#x27;, &#x27;&#x3c;div id=&#x22;watch8-action-buttons&#x22; class
+=&#x22;watch-action-buttons clearfix&#x22;&#x3e;&#x27;);
+  if (ownerinfo === &#x27;&#x27;) {
+    return {};
+  }
+  ownerinfo = new Entities().decode(ownerinfo);
+  var channelMatch = ownerinfo.match(authorRegexp);
+  var userMatch = ownerinfo.match(aliasRegExp);
+  return {
+    id: channelMatch[1],
+    name: channelMatch[2],
+    avatar: url.resolve(VIDEO_URL, exports.between(ownerinfo, &#x27;data-thumb=&#x22;&#x27;, &#x27;&#x22;&#x27;)),
+    user: userMatch ? userMatch[1] : null,
+    channel_url: &#x27;https://www.youtube.com/channel/&#x27; + channelMatch[1],
+    user_url: userMatch ? &#x27;https://www.youtube.com/user/&#x27; + userMatch[1] : null,
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    &#x27;&#x3c;h1 id=&#x22;unavailable-message&#x22; class=&#x22;message&#x22;&#x3e;&#x27;, &#x27;&#x3c;/h1&#x3e;&#x27;).trim()));
+}
+    }
+
+    // Parse out some additional informations since we already load that page.
+    var additional = {
+// Get informations about the author/uploader.
+author: util.<span class="apidocCodeKeywordSpan">getAuthor</span>(body),
+
+// Get the day the vid was published.
+published: util.getPublished(body),
+
+// Get description from #eow-description.
+description: util.getVideoDescription(body),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.getPublished" id="apidoc.element.ytdl-core.util.getPublished">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>getPublished
+        <span class="apidocSignatureSpan">(body)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getPublished = function (body) {
+  return Date.parse(exports.between(body, &#x27;&#x3c;meta itemprop=&#x22;datePublished&#x22; content=&#x22;&#x27;, &#x27;&#x22;&#x3e;&#x27;));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+    // Parse out some additional informations since we already load that page.
+    var additional = {
+// Get informations about the author/uploader.
+author: util.getAuthor(body),
+
+// Get the day the vid was published.
+published: util.<span class="apidocCodeKeywordSpan">getPublished</span>(body),
+
+// Get description from #eow-description.
+description: util.getVideoDescription(body),
+
+// Get related videos.
+related_videos: util.getRelatedVideos(body),
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.getRelatedVideos" id="apidoc.element.ytdl-core.util.getRelatedVideos">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>getRelatedVideos
+        <span class="apidocSignatureSpan">(body)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getRelatedVideos = function (body) {
+  var jsonStr = exports.between(body, &#x27;\&#x27;RELATED_PLAYER_ARGS\&#x27;: {&#x22;rvs&#x22;:&#x27;, &#x27;},&#x27;);
+  try {
+    jsonStr = JSON.parse(jsonStr);
+  }
+  catch (err) {
+    return [];
+  }
+  return jsonStr.split(&#x27;,&#x27;).map(function(link) {
+    return qs.parse(link);
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Get the day the vid was published.
+published: util.getPublished(body),
+
+// Get description from #eow-description.
+description: util.getVideoDescription(body),
+
+// Get related videos.
+related_videos: util.<span class="apidocCodeKeywordSpan">getRelatedVideos</span>(body),
+
+// Give the canonical link to the video.
+video_url: url,
+
+// Thumbnails.
+iurlsd     : THUMBNAIL_URL + id + &#x27;/sddefault.jpg&#x27;,
+iurlmq     : THUMBNAIL_URL + id + &#x27;/mqdefault.jpg&#x27;,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.getVideoDescription" id="apidoc.element.ytdl-core.util.getVideoDescription">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>getVideoDescription
+        <span class="apidocSignatureSpan">(html)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getVideoDescription = function (html) {
+  var regex = /&#x3c;p.*?id=&#x22;eow-description&#x22;.*?&#x3e;(.+?)&#x3c;\/p&#x3e;[\n\r\s]*?&#x3c;\/div&#x3e;/im;
+  var description = html.match(regex);
+  return description ? new Entities().decode(description[1]
+    .replace(/\n/g, &#x27; &#x27;)
+    .replace(/\s*&#x3c;\s*br\s*\/?\s*&#x3e;\s*/gi, &#x27;\n&#x27;)
+    .replace(/&#x3c;\s*\/\s*p\s*&#x3e;\s*&#x3c;\s*p[^&#x3e;]*&#x3e;/gi, &#x27;\n&#x27;)
+    .replace(/&#x3c;.*?&#x3e;/gi, &#x27;&#x27;)).trim() : &#x27;&#x27;
+    ;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// Get informations about the author/uploader.
+author: util.getAuthor(body),
+
+// Get the day the vid was published.
+published: util.getPublished(body),
+
+// Get description from #eow-description.
+description: util.<span class="apidocCodeKeywordSpan">getVideoDescription</span>(body),
+
+// Get related videos.
+related_videos: util.getRelatedVideos(body),
+
+// Give the canonical link to the video.
+video_url: url,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.getVideoID" id="apidoc.element.ytdl-core.util.getVideoID">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>getVideoID
+        <span class="apidocSignatureSpan">(link)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">getVideoID = function (link) {
+  if (idRegex.test(link)) {
+    return link;
+  }
+  var parsed = url.parse(link, true);
+  var id = parsed.query.v;
+  if (parsed.hostname === &#x27;youtu.be&#x27; ||
+      (parsed.hostname === &#x27;youtube.com&#x27; ||
+       parsed.hostname === &#x27;www.youtube.com&#x27;) &#x26;&#x26; !id) {
+    var s = parsed.pathname.split(&#x27;/&#x27;);
+    id = s[s.length - 1];
+  }
+  if (!id) {
+    return new Error(&#x27;No video id found: &#x27; + link);
+  }
+  if (!idRegex.test(id)) {
+    return new Error(&#x27;Video id (&#x27; + id + &#x27;) does not match expected format (&#x27; + idRegex.toString() + &#x27;)&#x27;);
+  }
+  return id;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      if (err) return reject(err);
+      resolve(info);
+    });
+  });
+}
+
+var myrequest = options.request || request;
+var id = util.<span class="apidocCodeKeywordSpan">getVideoID</span>(link);
+if (id instanceof Error) return callback(id);
+
+// Try getting config from the video page first.
+var url = VIDEO_URL + id;
+myrequest(url, options.requestOptions, function(err, body) {
+  if (err) return callback(err);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.objectAssign" id="apidoc.element.ytdl-core.util.objectAssign">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>objectAssign
+        <span class="apidocSignatureSpan">(target, source, deep)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">objectAssign = function (target, source, deep) {
+  for (var key in source) {
+    if (deep &#x26;&#x26; typeof source[key] === &#x27;object&#x27; &#x26;&#x26; source[key] != null &#x26;&#x26;
+        target[key]) {
+      exports.objectAssign(target[key], source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  info.fmt_list.map(function(format) {
+    return format.split(&#x27;/&#x27;);
+  }) : [];
+
+info.formats = util.parseFormats(info);
+
+// Add additional properties to info.
+info = util.<span class="apidocCodeKeywordSpan">objectAssign</span>(info, additional, false);
+
+if (info.formats.some(function(f) { return !!f.s; }) ||
+    config.args.dashmpd || info.dashmpd || info.hlsvp) {
+  var html5playerfile = urllib.resolve(VIDEO_URL, config.assets.js);
+  sig.getTokens(html5playerfile, options, function(err, tokens) {
+    if (err) return callback(err);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.parallel" id="apidoc.element.ytdl-core.util.parallel">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>parallel
+        <span class="apidocSignatureSpan">(funcs, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parallel = function (funcs, callback) {
+  var funcsDone = 0;
+  var len = funcs.length;
+  var errGiven = false;
+  var results = [];
+
+  function checkDone(index, err, result) {
+    if (errGiven) { return; }
+    if (err) {
+      errGiven = true;
+      callback(err);
+      return;
+    }
+    results[index] = result;
+    if (++funcsDone === len) {
+      callback(null, results);
+    }
+  }
+
+  if (len &#x3e; 0) {
+    for (var i = 0; i &#x3c; len; i++) {
+      funcs[i](checkDone.bind(null, i));
+    }
+  } else {
+    callback(null, results);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}
+
+if (info.hlsvp) {
+  info.hlsvp = decipherURL(info.hlsvp, tokens);
+  funcs.push(getM3U8.bind(null, info.hlsvp, options));
+}
+
+util.<span class="apidocCodeKeywordSpan">parallel</span>(funcs, function(err, results) {
+  if (err) return callback(err);
+  if (results[0]) { mergeFormats(info, results[0]); }
+  if (results[1]) { mergeFormats(info, results[1]); }
+  if (results[2]) { mergeFormats(info, results[2]); }
+  if (!info.formats.length) {
+    callback(new Error(&#x27;No formats found&#x27;));
+    return;
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.parseFormats" id="apidoc.element.ytdl-core.util.parseFormats">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>parseFormats
+        <span class="apidocSignatureSpan">(info, debug)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parseFormats = function (info, debug) {
+  var formats = [];
+  if (info.url_encoded_fmt_stream_map) {
+    formats = formats
+      .concat(info.url_encoded_fmt_stream_map.split(&#x27;,&#x27;));
+  }
+  if (info.adaptive_fmts) {
+    formats = formats.concat(info.adaptive_fmts.split(&#x27;,&#x27;));
+  }
+
+  formats = formats
+    .map(function(format) {
+      var data = qs.parse(format);
+      var meta = FORMATS[data.itag];
+      if (!meta &#x26;&#x26; debug) {
+        console.warn(&#x27;No format metadata for itag &#x27; + data.itag + &#x27; found&#x27;);
+      }
+
+      for (var key in meta) {
+        data[key] = meta[key];
+      }
+
+      return data;
+    });
+  delete info.url_encoded_fmt_stream_map;
+  delete info.adaptive_fmts;
+
+  return formats;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+});
+
+info.fmt_list = info.fmt_list ?
+  info.fmt_list.map(function(format) {
+    return format.split(&#x27;/&#x27;);
+  }) : [];
+
+info.formats = util.<span class="apidocCodeKeywordSpan">parseFormats</span>(info);
+
+// Add additional properties to info.
+info = util.objectAssign(info, additional, false);
+
+if (info.formats.some(function(f) { return !!f.s; }) ||
+    config.args.dashmpd || info.dashmpd || info.hlsvp) {
+  var html5playerfile = urllib.resolve(VIDEO_URL, config.assets.js);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.parseTime" id="apidoc.element.ytdl-core.util.parseTime">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>parseTime
+        <span class="apidocSignatureSpan">(time)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parseTime = function (time) {
+  var result = timeRegexp.exec(time.toString());
+  var hours  = result[1] || 0;
+  var mins   = result[2] || 0;
+  var secs   = result[3] || 0;
+  var ms     = result[4] || 0;
+
+  return hours * 3600000 + mins * 60000 + secs * 1000 + parseInt(ms, 10);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.ytdl-core.util.sortFormats" id="apidoc.element.ytdl-core.util.sortFormats">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>sortFormats
+        <span class="apidocSignatureSpan">(a, b)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">sortFormats = function (a, b) {
+  var ares = a.resolution ? parseInt(a.resolution.slice(0, -1), 10) : 0;
+  var bres = b.resolution ? parseInt(b.resolution.slice(0, -1), 10) : 0;
+  var afeats = ~~!!ares * 2 + ~~!!a.audioBitrate;
+  var bfeats = ~~!!bres * 2 + ~~!!b.audioBitrate;
+
+  function getBitrate(c) {
+    if (c.bitrate) {
+      var s = c.bitrate.split(&#x27;-&#x27;);
+      return parseFloat(s[s.length - 1], 10);
+    } else {
+      return 0;
+    }
+  }
+
+  function audioScore(c) {
+    var abitrate = c.audioBitrate || 0;
+    var aenc = audioEncodingRanks[c.audioEncoding] || 0;
+    return abitrate + aenc / 10;
+  }
+
+  if (afeats === bfeats) {
+    if (ares === bres) {
+      var avbitrate = getBitrate(a);
+      var bvbitrate = getBitrate(b);
+      if (avbitrate === bvbitrate) {
+        var aascore = audioScore(a);
+        var bascore = audioScore(b);
+        if (aascore === bascore) {
+          var avenc = videoEncodingRanks[a.encoding] || 0;
+          var bvenc = videoEncodingRanks[b.encoding] || 0;
+          return bvenc - avenc;
+        } else {
+          return bascore - aascore;
+        }
+      } else {
+        return bvbitrate - avbitrate;
+      }
+    } else {
+      return bres - ares;
+    }
+  } else {
+    return bfeats - afeats;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
