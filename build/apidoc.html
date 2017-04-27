@@ -51,7 +51,7 @@
 
         href="https://github.com/fent/node-ytdl-core#readme"
 
-    >ytdl-core (v0.12.1)</a>
+    >ytdl-core (v0.13.1)</a>
 </h1>
 <h4>Youtube video downloader in pure javascript.</h4>
 <div class="apidocSectionDiv"><a
@@ -102,15 +102,6 @@
             <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.getInfo">
             function <span class="apidocSignatureSpan">ytdl-core.</span>getInfo
             <span class="apidocSignatureSpan">(link, options, callback)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.toString">
-            function <span class="apidocSignatureSpan">ytdl-core.</span>toString
-            <span class="apidocSignatureSpan">()</span>
             </a>
 
         </li>
@@ -225,6 +216,15 @@
 
         <li>
 
+            <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.addFormatMeta">
+            function <span class="apidocSignatureSpan">ytdl-core.util.</span>addFormatMeta
+            <span class="apidocSignatureSpan">(format)</span>
+            </a>
+
+        </li>
+
+        <li>
+
             <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.between">
             function <span class="apidocSignatureSpan">ytdl-core.util.</span>between
             <span class="apidocSignatureSpan">(haystack, left, right)</span>
@@ -326,7 +326,7 @@
 
             <a class="apidocElementLiA" href="#apidoc.element.ytdl-core.util.parseFormats">
             function <span class="apidocSignatureSpan">ytdl-core.util.</span>parseFormats
-            <span class="apidocSignatureSpan">(info, debug)</span>
+            <span class="apidocSignatureSpan">(info)</span>
             </a>
 
         </li>
@@ -405,31 +405,31 @@
   var format;
   var quality = options.quality || &#x27;highest&#x27;;
   switch (quality) {
-  case &#x27;highest&#x27;:
-    format = formats[0];
-    break;
+    case &#x27;highest&#x27;:
+      format = formats[0];
+      break;
 
-  case &#x27;lowest&#x27;:
-    format = formats[formats.length - 1];
-    break;
+    case &#x27;lowest&#x27;:
+      format = formats[formats.length - 1];
+      break;
 
-  default:
-    var getFormat = function(itag) {
-      for (var i = 0, len = formats.length; i &#x3c; len; i++) {
-        if (formats[i].itag === &#x27;&#x27; + itag) {
-          return formats[i];
+    default:
+      var getFormat = function(itag) {
+        for (var i = 0, len = formats.length; i &#x3c; len; i++) {
+          if (formats[i].itag === &#x27;&#x27; + itag) {
+            return formats[i];
+          }
         }
+        return null;
+      };
+      if (Array.isArray(quality)) {
+        for (var i = 0, len = quality.length; i &#x3c; len; i++) {
+          format = getFormat(quality[i]);
+          if (format) { break; }
+        }
+      } else {
+        format = getFormat(quality);
       }
-      return null;
-    };
-    if (Array.isArray(quality)) {
-      for (var i = 0, len = quality.length; i &#x3c; len; i++) {
-        format = getFormat(quality[i]);
-        if (format) { break; }
-      }
-    } else {
-      format = getFormat(quality);
-    }
 
   }
 
@@ -505,24 +505,24 @@ Can be used if you&#x27;d like to choose a format yourself with the [options abo
     <li>description and source-code<pre class="apidocCodePre">filterFormats = function (formats, filter) {
   var fn;
   switch (filter) {
-  case &#x27;video&#x27;:
-    fn = function(format) { return format.bitrate; };
-    break;
+    case &#x27;video&#x27;:
+      fn = function(format) { return format.bitrate; };
+      break;
 
-  case &#x27;videoonly&#x27;:
-    fn = function(format) { return format.bitrate &#x26;&#x26; !format.audioBitrate; };
-    break;
+    case &#x27;videoonly&#x27;:
+      fn = function(format) { return format.bitrate &#x26;&#x26; !format.audioBitrate; };
+      break;
 
-  case &#x27;audio&#x27;:
-    fn = function(format) { return format.audioBitrate; };
-    break;
+    case &#x27;audio&#x27;:
+      fn = function(format) { return format.audioBitrate; };
+      break;
 
-  case &#x27;audioonly&#x27;:
-    fn = function(format) { return !format.bitrate &#x26;&#x26; format.audioBitrate; };
-    break;
+    case &#x27;audioonly&#x27;:
+      fn = function(format) { return !format.bitrate &#x26;&#x26; format.audioBitrate; };
+      break;
 
-  default:
-    fn = filter;
+    default:
+      fn = filter;
   }
   return formats.filter(fn);
 }</pre></li>
@@ -570,13 +570,16 @@ ytdl cannot download videos that fall into the following
     });
   }
 
-  var myrequest = options.request || request;
+  if (options.request) {
+    console.warn(&#x27;`options.request` is deprecated, please use `options.requestOptions.transform`&#x27;);
+  }
+
   var id = util.getVideoID(link);
   if (id instanceof Error) return callback(id);
 
   // Try getting config from the video page first.
   var url = VIDEO_URL + id;
-  myrequest(url, options.requestOptions, function(err, body) {
+  request(url, options.requestOptions, function(err, res, body) {
     if (err) return callback(err);
 
     // Check if there are any errors with this video page.
@@ -631,7 +634,7 @@ ytdl cannot download videos that fall into the following
       // If the video page doesn&#x27;t work, maybe because it has mature content.
       // and requires an account logged into view, try the embed page.
       url = EMBED_URL + id;
-      myrequest(url, options.requestOptions, function(err, body) {
+      request(url, options.requestOptions, function(err, res, body) {
         if (err) return callback(err);
 
         config = util.between(body, &#x27;t.setConfig({\&#x27;PLAYER_CONFIG\&#x27;: &#x27;, &#x27;},\&#x27;&#x27;);
@@ -669,37 +672,6 @@ you may pass that `info`, along with other `options` to `downloadFromInfo`.
 
 
 
-    <h2>
-        <a href="#apidoc.element.ytdl-core.toString" id="apidoc.element.ytdl-core.toString">
-        function <span class="apidocSignatureSpan">ytdl-core.</span>toString
-        <span class="apidocSignatureSpan">()</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">toString = function () {
-    return text;
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">...
- * Parses a string representation of amount of milliseconds.
- *
- * @param {String} time
- * @return {Number}
- */
-var timeRegexp = /(?:(\d+)h)?(?:(\d+)m(?!s))?(?:(\d+)s)?(?:(\d+)(?:ms)?)?/;
-exports.parseTime = function(time) {
-  var result = timeRegexp.exec(time.<span class="apidocCodeKeywordSpan">toString</span>());
-  var hours  = result[1] || 0;
-  var mins   = result[2] || 0;
-  var secs   = result[3] || 0;
-  var ms     = result[4] || 0;
-
-  return hours * 3600000 + mins * 60000 + secs * 1000 + parseInt(ms, 10);
-};
-...</pre></li>
-    </ul>
-
-
-
 
 
 
@@ -722,33 +694,21 @@ exports.parseTime = function(time) {
   return exports.store[key];
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-Attempts to download a video from the given url. Returns a readable stream. `options` can have the following keys
-
-* `quality` - Video quality to download. Can be an [itag value](http://en.wikipedia.org/wiki/YouTube#Quality_and_formats) value,
-a list of itag values, or `highest`/`lowest`. Defaults to `highest`.
-* `filter` - Can be `video` to filter for formats that contain video, `videoonly` for formats that contain video and no additional
- audio track. Can also be `audio` or `audioonly`. You can give a filtering function that gets called with each format available.
-Used to decide what format to download. This function is given the `format` object as its first argument, and should return true
- if the format is preferable.
-* `format` - This can be a specific `format` object returned from `getInfo`. This is primarily used to download specific video or
- audio streams. **Note:** Supplying this option will ignore the `filter` and `quality` options since the format is explicitly provided
-.
-* `range` - A byte range in the form `{start: INT, end: INT}` that specifies part of the file to download. ie {start: 10355705,
-end: 12452856}. Note that this downloads a portion of the file, and not a separately spliced video.
-* `begin` - What time to begin downloading the video, supports formats 00:00:00.000, or 0ms, 0s, 0m, 0h, or number of milliseconds
-. Example: 1:30, 05:10.123, 10m30s. This option may not work on super short (less than 30s) videos, and has to be at ar above 6s
-. See [#129](https://github.com/fent/node-ytdl-core/issues/129)
-* `requestOptions` - Anything to merge into the request options which `http.<span class="apidocCodeKeywordSpan">get</span>()` is
- called with, such as headers.
-* `request` - A function that will be called for each request, instead of ytdl&#x27;s internal method of making requests. Its signature
- looks like `Function(url, options, [callback(error, body)]): http.ClientRequest`
-* `highWaterMark` - How much of the video download to buffer into memory. See [node&#x27;s docs](https://nodejs.org/api/stream.html
-#stream_constructor_new_stream_writable_options) for more.
-
-```js
-// Example with `filter` option.
-ytdl(url, { filter: function(format) { return format.container === &#x27;mp4&#x27;; } })
-.pipe(fs.createWriteStream(&#x27;vide.mp4&#x27;));
+ */
+exports.getTokens = function(html5playerfile, options, callback) {
+var key, cachedTokens;
+var rs = /(?:html5)?player-([a-zA-Z0-9\-_]+)(?:\.js|\/)/
+  .exec(html5playerfile);
+if (rs) {
+  key = rs[1];
+  cachedTokens = cache.<span class="apidocCodeKeywordSpan">get</span>(key);
+} else {
+  console.warn(&#x27;Could not extract html5player key:&#x27;, html5playerfile);
+}
+if (cachedTokens) {
+  callback(null, cachedTokens);
+} else {
+  request(html5playerfile, options.requestOptions, function(err, res, body) {
 ...</pre></li>
     </ul>
 
@@ -820,21 +780,21 @@ ytdl(url, { filter: function(format) { return format.container === &#x27;mp4&#x2
   for (var i = 0, len = tokens.length; i &#x3c; len; i++) {
     var token = tokens[i];
     switch (token[0]) {
-    case &#x27;r&#x27;:
-      sig = sig.reverse();
-      break;
-    case &#x27;w&#x27;:
-      pos = ~~token.slice(1);
-      sig = swapHeadAndPosition(sig, pos);
-      break;
-    case &#x27;s&#x27;:
-      pos = ~~token.slice(1);
-      sig = sig.slice(pos);
-      break;
-    case &#x27;p&#x27;:
-      pos = ~~token.slice(1);
-      sig.splice(0, pos);
-      break;
+      case &#x27;r&#x27;:
+        sig = sig.reverse();
+        break;
+      case &#x27;w&#x27;:
+        pos = ~~token.slice(1);
+        sig = swapHeadAndPosition(sig, pos);
+        break;
+      case &#x27;s&#x27;:
+        pos = ~~token.slice(1);
+        sig = sig.slice(pos);
+        break;
+      case &#x27;p&#x27;:
+        pos = ~~token.slice(1);
+        sig.splice(0, pos);
+        break;
     }
   }
   return sig.join(&#x27;&#x27;);
@@ -925,28 +885,28 @@ if (config.args.dashmpd) {
   var tokens = [];
   while ((result = tokenizeRegexp.exec(funcbody)) !== null) {
     switch (result[1]) {
-    case swapKey:
-      tokens.push(&#x27;w&#x27; + result[2]);
-      break;
-    case reverseKey:
-      tokens.push(&#x27;r&#x27;);
-      break;
-    case sliceKey:
-      tokens.push(&#x27;s&#x27; + result[2]);
-      break;
-    case spliceKey:
-      tokens.push(&#x27;p&#x27; + result[2]);
-      break;
+      case swapKey:
+        tokens.push(&#x27;w&#x27; + result[2]);
+        break;
+      case reverseKey:
+        tokens.push(&#x27;r&#x27;);
+        break;
+      case sliceKey:
+        tokens.push(&#x27;s&#x27; + result[2]);
+        break;
+      case spliceKey:
+        tokens.push(&#x27;p&#x27; + result[2]);
+        break;
     }
   }
   return tokens;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
+  }
   if (cachedTokens) {
     callback(null, cachedTokens);
   } else {
-    var myrequest = options.request || request;
-    myrequest(html5playerfile, options.requestOptions, function(err, body) {
+    request(html5playerfile, options.requestOptions, function(err, res, body) {
 if (err) return callback(err);
 
 var tokens = exports.<span class="apidocCodeKeywordSpan">extractActions</span>(body);
@@ -982,8 +942,7 @@ callback(null, tokens);
   if (cachedTokens) {
     callback(null, cachedTokens);
   } else {
-    var myrequest = options.request || request;
-    myrequest(html5playerfile, options.requestOptions, function(err, body) {
+    request(html5playerfile, options.requestOptions, function(err, res, body) {
       if (err) return callback(err);
 
       var tokens = exports.extractActions(body);
@@ -1085,6 +1044,28 @@ exports.decipherFormats = function(formats, tokens, debug) {
 
 
     <h2>
+        <a href="#apidoc.element.ytdl-core.util.addFormatMeta" id="apidoc.element.ytdl-core.util.addFormatMeta">
+        function <span class="apidocSignatureSpan">ytdl-core.util.</span>addFormatMeta
+        <span class="apidocSignatureSpan">(format)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">addFormatMeta = function (format) {
+  var meta = FORMATS[format.itag];
+  for (var key in meta) {
+    format[key] = meta[key];
+  }
+
+  if (/\/live\/1\//.test(format.url)) {
+    format.live = true;
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
         <a href="#apidoc.element.ytdl-core.util.between" id="apidoc.element.ytdl-core.util.between">
         function <span class="apidocSignatureSpan">ytdl-core.util.</span>between
         <span class="apidocSignatureSpan">(haystack, left, right)</span>
@@ -1105,7 +1086,7 @@ exports.decipherFormats = function(formats, tokens, debug) {
 
   // Try getting config from the video page first.
   var url = VIDEO_URL + id;
-  myrequest(url, options.requestOptions, function(err, body) {
+  request(url, options.requestOptions, function(err, res, body) {
 if (err) return callback(err);
 
 // Check if there are any errors with this video page.
@@ -1147,31 +1128,31 @@ if (!/\bhid\b/.test(util.between(unavailableMsg, &#x27;class=&#x22;&#x27;, &#x27
   var format;
   var quality = options.quality || &#x27;highest&#x27;;
   switch (quality) {
-  case &#x27;highest&#x27;:
-    format = formats[0];
-    break;
+    case &#x27;highest&#x27;:
+      format = formats[0];
+      break;
 
-  case &#x27;lowest&#x27;:
-    format = formats[formats.length - 1];
-    break;
+    case &#x27;lowest&#x27;:
+      format = formats[formats.length - 1];
+      break;
 
-  default:
-    var getFormat = function(itag) {
-      for (var i = 0, len = formats.length; i &#x3c; len; i++) {
-        if (formats[i].itag === &#x27;&#x27; + itag) {
-          return formats[i];
+    default:
+      var getFormat = function(itag) {
+        for (var i = 0, len = formats.length; i &#x3c; len; i++) {
+          if (formats[i].itag === &#x27;&#x27; + itag) {
+            return formats[i];
+          }
         }
+        return null;
+      };
+      if (Array.isArray(quality)) {
+        for (var i = 0, len = quality.length; i &#x3c; len; i++) {
+          format = getFormat(quality[i]);
+          if (format) { break; }
+        }
+      } else {
+        format = getFormat(quality);
       }
-      return null;
-    };
-    if (Array.isArray(quality)) {
-      for (var i = 0, len = quality.length; i &#x3c; len; i++) {
-        format = getFormat(quality[i]);
-        if (format) { break; }
-      }
-    } else {
-      format = getFormat(quality);
-    }
 
   }
 
@@ -1212,24 +1193,24 @@ If you&#x27;d like to work with only some formats, you can use the [`filter` opt
     <li>description and source-code<pre class="apidocCodePre">filterFormats = function (formats, filter) {
   var fn;
   switch (filter) {
-  case &#x27;video&#x27;:
-    fn = function(format) { return format.bitrate; };
-    break;
+    case &#x27;video&#x27;:
+      fn = function(format) { return format.bitrate; };
+      break;
 
-  case &#x27;videoonly&#x27;:
-    fn = function(format) { return format.bitrate &#x26;&#x26; !format.audioBitrate; };
-    break;
+    case &#x27;videoonly&#x27;:
+      fn = function(format) { return format.bitrate &#x26;&#x26; !format.audioBitrate; };
+      break;
 
-  case &#x27;audio&#x27;:
-    fn = function(format) { return format.audioBitrate; };
-    break;
+    case &#x27;audio&#x27;:
+      fn = function(format) { return format.audioBitrate; };
+      break;
 
-  case &#x27;audioonly&#x27;:
-    fn = function(format) { return !format.bitrate &#x26;&#x26; format.audioBitrate; };
-    break;
+    case &#x27;audioonly&#x27;:
+      fn = function(format) { return !format.bitrate &#x26;&#x26; format.audioBitrate; };
+      break;
 
-  default:
-    fn = filter;
+    default:
+      fn = filter;
   }
   return formats.filter(fn);
 }</pre></li>
@@ -1280,7 +1261,23 @@ ytdl cannot download videos that fall into the following
     return total;
   }
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  });
+  req.on(&#x27;error&#x27;, stream.emit.bind(stream, &#x27;error&#x27;));
+  stream.destroy = req.end.bind(req);
+  req.pipe(stream);
+
+} else {
+  if (options.begin) {
+    url += &#x27;&#x26;begin=&#x27; + util.<span class="apidocCodeKeywordSpan">fromHumanTime</span>(options.begin);
+  }
+  doDownload(stream, url, options, {
+    trys: options.retries || 5,
+    range: {
+      start: options.range &#x26;&#x26; options.range.start ? options.range.start : 0,
+      end: options.range &#x26;&#x26; options.range.end ? options.range.end : -1,
+    },
+...</pre></li>
     </ul>
 
 
@@ -1451,8 +1448,8 @@ video_url: url,
   var parsed = url.parse(link, true);
   var id = parsed.query.v;
   if (parsed.hostname === &#x27;youtu.be&#x27; ||
-      (parsed.hostname === &#x27;youtube.com&#x27; ||
-       parsed.hostname === &#x27;www.youtube.com&#x27;) &#x26;&#x26; !id) {
+     (parsed.hostname === &#x27;youtube.com&#x27; ||
+      parsed.hostname === &#x27;www.youtube.com&#x27;) &#x26;&#x26; !id) {
     var s = parsed.pathname.split(&#x27;/&#x27;);
     id = s[s.length - 1];
   }
@@ -1465,19 +1462,19 @@ video_url: url,
   return id;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-      if (err) return reject(err);
-      resolve(info);
-    });
   });
 }
 
-var myrequest = options.request || request;
+if (options.request) {
+  console.warn(&#x27;`options.request` is deprecated, please use `options.requestOptions.transform`&#x27;);
+}
+
 var id = util.<span class="apidocCodeKeywordSpan">getVideoID</span>(link);
 if (id instanceof Error) return callback(id);
 
 // Try getting config from the video page first.
 var url = VIDEO_URL + id;
-myrequest(url, options.requestOptions, function(err, body) {
+request(url, options.requestOptions, function(err, res, body) {
   if (err) return callback(err);
 ...</pre></li>
     </ul>
@@ -1580,11 +1577,11 @@ util.<span class="apidocCodeKeywordSpan">parallel</span>(funcs, function(err, re
     <h2>
         <a href="#apidoc.element.ytdl-core.util.parseFormats" id="apidoc.element.ytdl-core.util.parseFormats">
         function <span class="apidocSignatureSpan">ytdl-core.util.</span>parseFormats
-        <span class="apidocSignatureSpan">(info, debug)</span>
+        <span class="apidocSignatureSpan">(info)</span>
         </a>
     </h2>
     <ul>
-    <li>description and source-code<pre class="apidocCodePre">parseFormats = function (info, debug) {
+    <li>description and source-code<pre class="apidocCodePre">parseFormats = function (info) {
   var formats = [];
   if (info.url_encoded_fmt_stream_map) {
     formats = formats
@@ -1595,19 +1592,7 @@ util.<span class="apidocCodeKeywordSpan">parallel</span>(funcs, function(err, re
   }
 
   formats = formats
-    .map(function(format) {
-      var data = qs.parse(format);
-      var meta = FORMATS[data.itag];
-      if (!meta &#x26;&#x26; debug) {
-        console.warn(&#x27;No format metadata for itag &#x27; + data.itag + &#x27; found&#x27;);
-      }
-
-      for (var key in meta) {
-        data[key] = meta[key];
-      }
-
-      return data;
-    });
+    .map(function(format) { return qs.parse(format); });
   delete info.url_encoded_fmt_stream_map;
   delete info.adaptive_fmts;
 
